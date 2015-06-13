@@ -22,7 +22,7 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
 //  Convenience method to get the json data about showtime
 // -------------------------------------------------------------------------------
 
-+(void)fetchShowInfoOfOffset:(NSNumber *)offset WithCompletionBlock:(ModelCompletionBlock)completionBlock {
++(void)fetchTwitterFeedWithCompletionBlock:(ModelCompletionBlock)completionBlock {
     
     __block NSArray *hipagesPlain = [[NSArray alloc] init];
     __block NSArray *hipagesHash = [[NSArray alloc] init];

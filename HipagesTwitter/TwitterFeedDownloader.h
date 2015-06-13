@@ -10,7 +10,7 @@
 
 @interface TwitterFeedDownloader : NSObject
 typedef void (^ModelCompletionBlock) (NSArray *model, NSError * error);
-+(void)fetchShowInfoOfOffset:(NSNumber *)offset WithCompletionBlock:(ModelCompletionBlock)completionBlock;
++(void)fetchTwitterFeedWithCompletionBlock:(ModelCompletionBlock)completionBlock;
 
 
 @end

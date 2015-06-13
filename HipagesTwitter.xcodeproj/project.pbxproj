@@ -22,6 +22,9 @@
 		3AE523531B2C119F002F9716 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE5234C1B2C119F002F9716 /* TwitterCore.framework */; };
 		3AE523541B2C119F002F9716 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE5234C1B2C119F002F9716 /* TwitterCore.framework */; };
 		3AE523571B2C12E0002F9716 /* TwittTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE523561B2C12E0002F9716 /* TwittTableViewController.m */; };
+		3AE5235E1B2C1497002F9716 /* TwitterFeedDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE5235D1B2C1497002F9716 /* TwitterFeedDownloader.m */; };
+		3AE523611B2C14F9002F9716 /* ConstantCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE523601B2C14F9002F9716 /* ConstantCollection.m */; };
+		3AE523641B2C2139002F9716 /* TWTRTweet+Equals.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE523631B2C2139002F9716 /* TWTRTweet+Equals.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +55,12 @@
 		3AE5234C1B2C119F002F9716 /* TwitterCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TwitterCore.framework; path = ../TwitterCore.framework; sourceTree = "<group>"; };
 		3AE523551B2C12E0002F9716 /* TwittTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwittTableViewController.h; sourceTree = "<group>"; };
 		3AE523561B2C12E0002F9716 /* TwittTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwittTableViewController.m; sourceTree = "<group>"; };
+		3AE5235C1B2C1497002F9716 /* TwitterFeedDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFeedDownloader.h; sourceTree = "<group>"; };
+		3AE5235D1B2C1497002F9716 /* TwitterFeedDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedDownloader.m; sourceTree = "<group>"; };
+		3AE5235F1B2C14F9002F9716 /* ConstantCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantCollection.h; sourceTree = "<group>"; };
+		3AE523601B2C14F9002F9716 /* ConstantCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantCollection.m; sourceTree = "<group>"; };
+		3AE523621B2C2139002F9716 /* TWTRTweet+Equals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TWTRTweet+Equals.h"; sourceTree = "<group>"; };
+		3AE523631B2C2139002F9716 /* TWTRTweet+Equals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TWTRTweet+Equals.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +162,10 @@
 			children = (
 				3AE523261B2C10B0002F9716 /* AppDelegate.h */,
 				3AE523271B2C10B0002F9716 /* AppDelegate.m */,
+				3AE5235C1B2C1497002F9716 /* TwitterFeedDownloader.h */,
+				3AE5235D1B2C1497002F9716 /* TwitterFeedDownloader.m */,
+				3AE5235F1B2C14F9002F9716 /* ConstantCollection.h */,
+				3AE523601B2C14F9002F9716 /* ConstantCollection.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -169,6 +182,8 @@
 		3AE5235B1B2C1335002F9716 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3AE523621B2C2139002F9716 /* TWTRTweet+Equals.h */,
+				3AE523631B2C2139002F9716 /* TWTRTweet+Equals.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -292,9 +307,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AE5235E1B2C1497002F9716 /* TwitterFeedDownloader.m in Sources */,
+				3AE523611B2C14F9002F9716 /* ConstantCollection.m in Sources */,
 				3AE523281B2C10B0002F9716 /* AppDelegate.m in Sources */,
 				3AE523571B2C12E0002F9716 /* TwittTableViewController.m in Sources */,
 				3AE523251B2C10B0002F9716 /* main.m in Sources */,
+				3AE523641B2C2139002F9716 /* TWTRTweet+Equals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
