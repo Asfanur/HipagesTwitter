@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "TwitterFeedDownloader.h"
 
 @interface HipagesTwitterTests : XCTestCase
 
@@ -25,16 +26,28 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+// -------------------------------------------------------------------------------
+//	testNetworkModelDownloader
+//  Check if the data is downloaded correctly and the count is correct
+// -------------------------------------------------------------------------------
+
+
+-(void)testTwitterFeedDownloader {
+    
+    XCTestExpectation *completionExpectation = [self expectationWithDescription:@"Twitter Feed Downloader"];
+    [TwitterFeedDownloader fetchTwitterFeedWithCompletionBlock:^(NSArray *model, NSError *error) {
+        XCTAssertNotNil(model, @"data should not be nil");
+        XCTAssertNil(error, @"error should be nil");
+        XCTAssertGreaterThan(model.count,0, @"Wrong Count");
+        [completionExpectation fulfill];
+        
     }];
+    
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+    
+    
 }
 
 @end
