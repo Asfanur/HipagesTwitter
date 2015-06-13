@@ -24,72 +24,38 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
 
 +(void)fetchTwitterFeedWithCompletionBlock:(ModelCompletionBlock)completionBlock {
     
-    __block NSArray *hipagesPlain = [[NSArray alloc] init];
-    __block NSArray *hipagesHash = [[NSArray alloc] init];
-    __block NSArray *hipageAt = [[NSArray alloc] init];
     __block NSError *hipagesError;
+    __block int  i = 0;;
+    __block NSArray *allHipagesTwitts = [[NSArray alloc] init];
     
-    dispatch_group_t group = dispatch_group_create();
     
-    dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
+    
+    NSArray *paramArray = @[@"hipages",@"@hipages",@"#hipages"];
+    for (NSString *param in paramArray) {
+        NSDictionary *keyValueDictionary = @{@"q" : param};
         
-         NSDictionary *params = @{@"q" : @"hipages"};
-        
-        [self fetchQuery:params withCompletionBlock:^(NSArray *array, NSURLResponse *response, NSError *error) {
+        [self fetchQuery:keyValueDictionary withCompletionBlock:^(NSArray *array, NSURLResponse *response, NSError *error) {
+            
             if (!error) {
-                hipagesPlain = array;
+                allHipagesTwitts = [allHipagesTwitts arrayByAddingObjectsFromArray:array];
             } else {
                 hipagesError = error;
             }
-            
-            
-            
-            
-        }];
-        
-    });
-    
-    
-    dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-        
-        NSDictionary *params = @{@"q" : @"@hipages"};
-        
-        [self fetchQuery:params withCompletionBlock:^(NSArray *array, NSURLResponse *response, NSError *error) {
-            if (!error) {
-                hipagesPlain = array;
-            } else {
-                hipagesError = error;
+            i++;
+            if (i == paramArray.count) {
+                NSLog(@"Hi, I'm the final block!\n");
+                
+                NSSet *set = [NSSet setWithArray:allHipagesTwitts];
+                NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:kCreatedAt ascending:NO];
+                completionBlock([set sortedArrayUsingDescriptors:@[descriptor]],hipagesError);
+                
+                
             }
             
         }];
-    });
-    
-    dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         
-        NSDictionary *params = @{@"q" : @"#hipages"};
-        
-        [self fetchQuery:params withCompletionBlock:^(NSArray *array, NSURLResponse *response, NSError *error) {
-            if (!error) {
-                hipagesPlain = array;
-            } else {
-                hipagesError = error;
-            }
-            
-        }];
-    });
-    
-    
-    dispatch_group_notify(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-        
-        NSArray *array = [hipagesPlain arrayByAddingObjectsFromArray:hipagesHash];
-        array = [array arrayByAddingObjectsFromArray:hipageAt];
-        NSSet *set = [NSSet setWithArray:array];
-        NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:kCreatedAt ascending:NO];
-        completionBlock([set sortedArrayUsingDescriptors:@[descriptor]],hipagesError);
-        
-    });
-    
-    
+    }
+     
     
     
 }
@@ -100,6 +66,7 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
 // -------------------------------------------------------------------------------
 +(void)fetchQuery:(NSDictionary *)params withCompletionBlock:(DownloadCompletionBlock)completionBlock {
     
+    // dispatch_async(dispatch_get_main_queue(), ^{
     
     [[Twitter sharedInstance] logInGuestWithCompletion:^(TWTRGuestSession *guestSession, NSError *error) {
         
@@ -141,6 +108,8 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
         }
         
     }];
+    
+    // });
     
 }
 
