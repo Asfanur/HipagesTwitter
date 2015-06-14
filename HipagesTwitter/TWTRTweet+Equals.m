@@ -10,10 +10,22 @@
 
 @implementation TWTRTweet (Equals)
 
+// -------------------------------------------------------------------------------
+//	isEqual:object
+//  Get the unique Twitter feed according to tweetID
+// -------------------------------------------------------------------------------
+
+
 - (BOOL)isEqual:(id)object {
     return [self.tweetID isEqualToString:((TWTRTweet *)object).tweetID];
     
 }
+
+// -------------------------------------------------------------------------------
+//	hash
+//  Generate hash value for our Twitter feed
+// -------------------------------------------------------------------------------
+
 
 - (NSUInteger)hash {
     return [self.tweetID hash];

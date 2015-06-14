@@ -11,7 +11,7 @@
 
 
 static NSString * const TweetTableReuseIdentifier = @"TweetCell";
-@interface TwittTableViewController ()<TWTRTweetViewDelegate>
+@interface TwittTableViewController ()
 @property (nonatomic, strong) NSArray *tweets; // Hold all the loaded tweets
 
 
@@ -21,27 +21,58 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tableView.estimatedRowHeight = 150;
-    self.tableView.rowHeight = UITableViewAutomaticDimension; // Explicitly set on iOS 8 if using automatic row heigh calculation
-    self.tableView.allowsSelection = NO;
-    [self.tableView registerClass:[TWTRTweetTableViewCell class] forCellReuseIdentifier:TweetTableReuseIdentifier];
-    __weak typeof(self) weakSelf = self;
     
+    //Automatic row heigh calculation
+    self.tableView.estimatedRowHeight = 150;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.allowsSelection = NO;
+    
+    [self.tableView registerClass:[TWTRTweetTableViewCell class] forCellReuseIdentifier:TweetTableReuseIdentifier];
+    
+    // Call convenience method to get the feed
+    __weak typeof(self) weakSelf = self;
     [TwitterFeedDownloader fetchTwitterFeedWithCompletionBlock:^(NSArray *model, NSError *error) {
         if (model.count > 0) {
-            typeof(self) strongSelf = weakSelf;
-            strongSelf.tweets = model;
-            [strongSelf.tableView reloadData];
+            weakSelf.tweets = model;
+            [weakSelf.tableView reloadData];
         } else {
-            NSLog(@" err%@",error.localizedDescription);
+            [weakSelf showAlert:error.localizedDescription];
         }
     }];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
+
+#pragma mark showAlert Method
+// Show error if any
+-(void)showAlert:(NSString *)message {
+    
+    UIAlertController * alert=   [UIAlertController
+                                  alertControllerWithTitle:@"Error"
+                                  message:message
+                                  preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction
+                         actionWithTitle:@"OK"
+                         style:UIAlertActionStyleDefault
+                         handler:^(UIAlertAction * action)
+                         {
+                             [alert dismissViewControllerAnimated:YES completion:nil];
+                             
+                         }];
+    
+    [alert addAction:ok];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+}
+
+
+
 
 # pragma mark - UITableViewDelegate Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -50,24 +81,13 @@ static NSString * const TweetTableReuseIdentifier = @"TweetCell";
 - (TWTRTweetTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TWTRTweet *tweet = self.tweets[indexPath.row];
     TWTRTweetTableViewCell *cell = (TWTRTweetTableViewCell *)[tableView  dequeueReusableCellWithIdentifier:TweetTableReuseIdentifier forIndexPath:indexPath];
+    // Configure Tweet Cell
     [cell configureWithTweet:tweet];
-    cell.tweetView.delegate = self;
+    // Customize Theme 
+    cell.tweetView.theme = TWTRTweetViewThemeDark;
+    cell.tweetView.primaryTextColor = [UIColor whiteColor];
+    cell.tweetView.backgroundColor = [UIColor orangeColor];
     return cell;
 }
-//// Calculate the height of each row
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    TWTRTweet *tweet = self.tweets[indexPath.row];
-//
-//    return [TWTRTweetTableViewCell heightForTweet:tweet width:CGRectGetWidth(self.view.bounds)];
-//}
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

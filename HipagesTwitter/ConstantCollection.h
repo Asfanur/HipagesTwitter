@@ -14,9 +14,5 @@
 #define kBaseURL @"https://api.twitter.com/1.1/search/tweets.json"
 #define kStatus @"statuses"
 #define kCreatedAt @"createdAt"
-
-//The following error domain is predefined.
-extern NSString * const AsfanurArafinErrorDomain;
-
-
+ 
 @end

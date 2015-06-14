@@ -23,7 +23,6 @@
 		3AE523541B2C119F002F9716 /* TwitterCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE5234C1B2C119F002F9716 /* TwitterCore.framework */; };
 		3AE523571B2C12E0002F9716 /* TwittTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE523561B2C12E0002F9716 /* TwittTableViewController.m */; };
 		3AE5235E1B2C1497002F9716 /* TwitterFeedDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE5235D1B2C1497002F9716 /* TwitterFeedDownloader.m */; };
-		3AE523611B2C14F9002F9716 /* ConstantCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE523601B2C14F9002F9716 /* ConstantCollection.m */; };
 		3AE523641B2C2139002F9716 /* TWTRTweet+Equals.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE523631B2C2139002F9716 /* TWTRTweet+Equals.m */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A5DD1CB1B2DAAF400E0EAC6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3AE5231F1B2C10B0002F9716 /* HipagesTwitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HipagesTwitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AE523231B2C10B0002F9716 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AE523241B2C10B0002F9716 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -58,7 +58,6 @@
 		3AE5235C1B2C1497002F9716 /* TwitterFeedDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterFeedDownloader.h; sourceTree = "<group>"; };
 		3AE5235D1B2C1497002F9716 /* TwitterFeedDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterFeedDownloader.m; sourceTree = "<group>"; };
 		3AE5235F1B2C14F9002F9716 /* ConstantCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstantCollection.h; sourceTree = "<group>"; };
-		3AE523601B2C14F9002F9716 /* ConstantCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstantCollection.m; sourceTree = "<group>"; };
 		3AE523621B2C2139002F9716 /* TWTRTweet+Equals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TWTRTweet+Equals.h"; sourceTree = "<group>"; };
 		3AE523631B2C2139002F9716 /* TWTRTweet+Equals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TWTRTweet+Equals.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +89,7 @@
 		3AE523161B2C10B0002F9716 = {
 			isa = PBXGroup;
 			children = (
+				3A5DD1CB1B2DAAF400E0EAC6 /* README.md */,
 				3AE523211B2C10B0002F9716 /* HipagesTwitter */,
 				3AE5233B1B2C10B0002F9716 /* HipagesTwitterTests */,
 				3AE523201B2C10B0002F9716 /* Products */,
@@ -165,7 +165,6 @@
 				3AE5235C1B2C1497002F9716 /* TwitterFeedDownloader.h */,
 				3AE5235D1B2C1497002F9716 /* TwitterFeedDownloader.m */,
 				3AE5235F1B2C14F9002F9716 /* ConstantCollection.h */,
-				3AE523601B2C14F9002F9716 /* ConstantCollection.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -308,7 +307,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AE5235E1B2C1497002F9716 /* TwitterFeedDownloader.m in Sources */,
-				3AE523611B2C14F9002F9716 /* ConstantCollection.m in Sources */,
 				3AE523281B2C10B0002F9716 /* AppDelegate.m in Sources */,
 				3AE523571B2C12E0002F9716 /* TwittTableViewController.m in Sources */,
 				3AE523251B2C10B0002F9716 /* main.m in Sources */,

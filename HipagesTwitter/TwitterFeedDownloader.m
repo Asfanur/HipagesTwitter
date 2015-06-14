@@ -18,34 +18,38 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
 @implementation TwitterFeedDownloader
 
 // -------------------------------------------------------------------------------
-//	fetchCountryInfoWithCompletionBlock:completionBlock
-//  Convenience method to get the json data about showtime
+//	fetchTwitterFeedWithCompletionBlock:completionBlock
+//  Convenience method to get the Combined data about hipages
 // -------------------------------------------------------------------------------
 
 +(void)fetchTwitterFeedWithCompletionBlock:(ModelCompletionBlock)completionBlock {
     
+    // Receive error if there is any
     __block NSError *hipagesError;
-    __block int  i = 0;;
+    // keep the count and checks when all the twitter feed arived
+    __block int  downloadCount = 0;
+    // An array that accumulated all the twitter feed
     __block NSArray *allHipagesTwitts = [[NSArray alloc] init];
-    
-    
-    
+    // array of search keywords
     NSArray *paramArray = @[@"hipages",@"@hipages",@"#hipages"];
-    for (NSString *param in paramArray) {
-        NSDictionary *keyValueDictionary = @{@"q" : param};
+    
+    // A loop that submits all the twitter search keywords and make a callback when all of the responces has arrived
+     for (NSString *param in paramArray) {
         
+        NSDictionary *keyValueDictionary = @{@"q" : param};
         [self fetchQuery:keyValueDictionary withCompletionBlock:^(NSArray *array, NSURLResponse *response, NSError *error) {
             
             if (!error) {
+                // adds downloaded twitter feed to existing array
                 allHipagesTwitts = [allHipagesTwitts arrayByAddingObjectsFromArray:array];
             } else {
                 hipagesError = error;
             }
-            i++;
-            if (i == paramArray.count) {
-                NSLog(@"Hi, I'm the final block!\n");
-                
+            downloadCount++;
+            if (downloadCount == paramArray.count) {
+                // Remove duplicate twitter feed
                 NSSet *set = [NSSet setWithArray:allHipagesTwitts];
+                // Sort the feed according to createdAt field  
                 NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:kCreatedAt ascending:NO];
                 completionBlock([set sortedArrayUsingDescriptors:@[descriptor]],hipagesError);
                 
@@ -66,8 +70,7 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
 // -------------------------------------------------------------------------------
 +(void)fetchQuery:(NSDictionary *)params withCompletionBlock:(DownloadCompletionBlock)completionBlock {
     
-    // dispatch_async(dispatch_get_main_queue(), ^{
-    
+    // Login as guest
     [[Twitter sharedInstance] logInGuestWithCompletion:^(TWTRGuestSession *guestSession, NSError *error) {
         
         NSError *clientError;
@@ -97,20 +100,19 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
                  }
                  else {
                      completionBlock(nil,response,connectionError);
-                     NSLog(@"Error: %@", connectionError);
+                     
                  }
                  
              }];
         }
         else {
             completionBlock(nil,nil,clientError);
-            NSLog(@"Error: %@", clientError);
+            
         }
         
     }];
     
-    // });
-    
+     
 }
 
 
