@@ -16,6 +16,8 @@
 
 @interface TwitterFeedDownloader : NSObject
 typedef void (^ModelCompletionBlock) (NSArray *model, NSError * error);
+
+//  Convenience method to get the Combined data about hipages
 +(void)fetchTwitterFeedWithCompletionBlock:(ModelCompletionBlock)completionBlock;
 
 

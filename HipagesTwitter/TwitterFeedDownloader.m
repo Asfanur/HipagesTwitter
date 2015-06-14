@@ -26,14 +26,14 @@ typedef void (^DownloadCompletionBlock) (NSArray *array, NSURLResponse *response
     
     // Receive error if there is any
     __block NSError *hipagesError;
-    // keep the count and checks when all the twitter feed arived
+    // keep the count and checks when all the twitter feed arrived
     __block int  downloadCount = 0;
     // An array that accumulated all the twitter feed
     __block NSArray *allHipagesTwitts = [[NSArray alloc] init];
     // array of search keywords
     NSArray *paramArray = @[@"hipages",@"@hipages",@"#hipages"];
     
-    // A loop that submits all the twitter search keywords and make a callback when all of the responces has arrived
+    // A loop that submits all the twitter search keywords and make a callback when all of the responses has arrived
      for (NSString *param in paramArray) {
         
         NSDictionary *keyValueDictionary = @{@"q" : param};
